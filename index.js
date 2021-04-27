@@ -29,7 +29,7 @@ const managerQuestions = [
     {
         type: 'input',
         message: "Please enter the manager's office number: ",
-        name: 'officeNumber',
+        name: 'officeNumber'
     }
 ];
 
@@ -56,7 +56,8 @@ const addAnotherRoleQuestion = [
     {
         type: 'list',
         message: 'Would you like to add an engineer or intern, or are you finished building your team?',
-        choices: ['Engineer', 'Intern', 'Done Adding']
+        choices: ['Engineer', 'Intern', 'Done Adding'],
+        name: 'addAnotherRoleChooser'
     }
 ]
 
@@ -96,7 +97,7 @@ const engineerQuestions = [
     {
         type: 'input',
         message: "Please enter the engineer's GitHub: ",
-        name: 'gitHub',
+        name: 'gitHub'
     }
 ];
 
@@ -133,7 +134,7 @@ const internQuestions = [
     {
         type: 'input',
         message: "Please enter the intern's school: ",
-        name: 'school',
+        name: 'school'
     }
 ];
 
