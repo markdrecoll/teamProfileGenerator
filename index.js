@@ -67,9 +67,9 @@ function addAnotherRoleQuestionFunction() {
     inquirer
         .prompt(addAnotherRoleQuestion)
         .then((response) => {
-            if (response === 'Engineer') {
+            if (response.addAnotherRoleChooser === 'Engineer') {
                 addAnEngineer();
-            } else if (response === 'Intern') {
+            } else if (response.addAnotherRoleChooser === 'Intern') {
                 addAnIntern();
             } else {
                 generateHTML();
@@ -140,7 +140,7 @@ const internQuestions = [
 
 function addAnIntern() {
     inquirer
-        .prompt(engineerQuestions)
+        .prompt(internQuestions)
         .then((response) => {
             // create a new engineer object then push the engineer into the employee array
             const internEmployee = new Intern(`${response.name}, ${response.id}, ${response.email}, ${response.school}`);
@@ -153,7 +153,7 @@ function addAnIntern() {
 
 function generateHTML() {
     // temporary log to see if things are going into array
-    console.log(employeeList);
+    console.log('GenerateHTML is being called');
 
     // function writeToFile(theFileName, data) {
     //     fs.writeFile('./dist/index.html', generateMarkdown(data), (err) =>
