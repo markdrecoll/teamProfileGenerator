@@ -42,7 +42,7 @@ function init() {
             console.log(response);
 
             // create a new manager object then push the manager into the employee array
-            const managerEmployee = New Manager(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
+            const managerEmployee = new Manager(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
             employeeList.push(managerEmployee);
             
             // call the function to ask if the user wants to add more employees
@@ -105,7 +105,7 @@ function addAnEngineer(){
         .prompt(engineerQuestions)
         .then((response) => {
             // create a new engineer object then push the engineer into the employee array
-            const engineerEmployee = New Engineer(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
+            const engineerEmployee = new Engineer(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
             employeeList.push(engineerEmployee);
 
             // call the function to ask if the user wants to add more employees
@@ -142,7 +142,7 @@ function addAnIntern(){
         .prompt(engineerQuestions)
         .then((response) => {
             // create a new engineer object then push the engineer into the employee array
-            const internEmployee = New Intern(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
+            const internEmployee = new Intern(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
             employeeList.push(internEmployee);
 
             // call the function to ask if the user wants to add more employees
