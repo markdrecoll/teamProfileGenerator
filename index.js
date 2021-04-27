@@ -1,8 +1,8 @@
 // import packages used by the application
-const Employee = require('./employee');
-const Manager = require('./manager');
-const Engineer = require('./engineer');
-const Intern = require('./intern');
+const Employee = require('./lib/employee');
+const Manager = require('./lib/manager');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
 const inquirer = require('inquirer');
 const fs = require('fs');
 
@@ -103,12 +103,18 @@ const engineerQuestions = [
 function addAnEngineer(){
     inquirer
         .prompt(engineerQuestions)
-        .
+        .then((response) => {
+            // create a new engineer object then push the engineer into the employee array
+            const engineerEmployee = New Engineer(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
+            employeeList.push(engineerEmployee);
 
+            // call the function to ask if the user wants to add more employees
+            addAnotherRoleQuestionFunction();
+        })
 }
 
 // create an array of questions about an intern to ask the user
-const engineerQuestions = [
+const internQuestions = [
     {
         type: 'input',
         message: "Please enter the intern's name: ",
@@ -131,31 +137,29 @@ const engineerQuestions = [
     }
 ];
 
+function addAnIntern(){
+    inquirer
+        .prompt(engineerQuestions)
+        .then((response) => {
+            // create a new engineer object then push the engineer into the employee array
+            const internEmployee = New Intern(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
+            employeeList.push(internEmployee);
+
+            // call the function to ask if the user wants to add more employees
+            addAnotherRoleQuestionFunction();
+        })
+}
+
+function generateHTML(){
+    // temporary log to see if things are going into array
+    console.log(employeeList);
+
+    // function writeToFile(theFileName, data) {
+    //     fs.writeFile('./dist/index.html', generateMarkdown(data), (err) =>
+    //         err ? console.error(err) : console.log('You successfully created a new read me file.')
+    //     );
+}
+
 
 // calls the initialize function
 init();
-
-
-
-
-
-
-// this asks the user if they want to add another member and gives options
-// const memberQuestion = {
-//     type:'list',
-//     message: 'Which type of team member would you like to add?',
-//     name: 'newMember',
-//     choices: ['Engineer', 'Intern', 'I do not want to add anyone else.']
-// }
-
-// function teamMemberSelect() {
-
-
-// }
-
-// creates a file with the name that the user inputted
-// function writeToFile(theFileName, data) {
-//     fs.writeFile('./dist/index.html', generateMarkdown(data), (err) =>
-//         err ? console.error(err) : console.log('You successfully created a new read me file.')
-//     );
-// }
