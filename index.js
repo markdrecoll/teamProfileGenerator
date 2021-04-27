@@ -19,7 +19,22 @@ const managerQuestions = [
     {
         type: 'input',
         message: "Please enter the manager's id: ",
-        name: 'id'
+        name: 'id',
+        validate: function (input) {
+            input = parseInt(input)
+                // Declare function as asynchronous, and save the done callback
+                var done = this.async();
+                // Do async stuff
+                setTimeout(function() {
+                  if (typeof input !== 'number' || isNaN(input) ) {
+                    // Pass the return value in the done callback
+                    done('You need to provide a number');
+                    return;
+                  }
+                  // Pass the return value in the done callback
+                  done(null, true);
+                }, 300);
+              }
     },
     {
         type: 'input',
@@ -29,7 +44,22 @@ const managerQuestions = [
     {
         type: 'input',
         message: "Please enter the manager's office number: ",
-        name: 'officeNumber'
+        name: 'officeNumber',
+        validate: function (input) {
+            input = parseInt(input)
+                // Declare function as asynchronous, and save the done callback
+                var done = this.async();
+                // Do async stuff
+                setTimeout(function() {
+                  if (typeof input !== 'number' || isNaN(input) ) {
+                    // Pass the return value in the done callback
+                    done('You need to provide a number');
+                    return;
+                  }
+                  // Pass the return value in the done callback
+                  done(null, true);
+                }, 300);
+              }        
     }
 ];
 
@@ -42,7 +72,7 @@ function init() {
             console.log(response);
 
             // create a new manager object then push the manager into the employee array
-            const managerEmployee = new Manager(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
+            const managerEmployee = new Manager(`${response.name}`, `${response.id}`, `${response.email}`, `${response.officeNumber}`);
             employeeList.push(managerEmployee);
 
             // call the function to ask if the user wants to add more employees
@@ -87,7 +117,22 @@ const engineerQuestions = [
     {
         type: 'input',
         message: "Please enter the engineer's id: ",
-        name: 'id'
+        name: 'id',
+        validate: function (input) {
+            input = parseInt(input)
+                // Declare function as asynchronous, and save the done callback
+                var done = this.async();
+                // Do async stuff
+                setTimeout(function() {
+                  if (typeof input !== 'number' || isNaN(input) ) {
+                    // Pass the return value in the done callback
+                    done('You need to provide a number');
+                    return;
+                  }
+                  // Pass the return value in the done callback
+                  done(null, true);
+                }, 300);
+              }
     },
     {
         type: 'input',
@@ -106,7 +151,7 @@ function addAnEngineer() {
         .prompt(engineerQuestions)
         .then((response) => {
             // create a new engineer object then push the engineer into the employee array
-            const engineerEmployee = new Engineer(`${response.name}, ${response.id}, ${response.email}, ${response.gitHub}`);
+            const engineerEmployee = new Engineer(`${response.name}`, `${response.id}`, `${response.email}`, `${response.gitHub}`);
             employeeList.push(engineerEmployee);
 
             // call the function to ask if the user wants to add more employees
@@ -124,7 +169,22 @@ const internQuestions = [
     {
         type: 'input',
         message: "Please enter the intern's id: ",
-        name: 'id'
+        name: 'id',
+        validate: function (input) {
+            input = parseInt(input)
+            // Declare function as asynchronous, and save the done callback
+            var done = this.async();
+            // Do async stuff
+            setTimeout(function() {
+                if (typeof input !== 'number' || isNaN(input) ) {
+                // Pass the return value in the done callback
+                done('You need to provide a number');
+                return;
+                }
+                // Pass the return value in the done callback
+                done(null, true);
+            }, 300);
+        }
     },
     {
         type: 'input',
@@ -143,7 +203,7 @@ function addAnIntern() {
         .prompt(internQuestions)
         .then((response) => {
             // create a new engineer object then push the engineer into the employee array
-            const internEmployee = new Intern(`${response.name}, ${response.id}, ${response.email}, ${response.school}`);
+            const internEmployee = new Intern(`${response.name}`, `${response.id}`, `${response.email}`, `${response.school}`);
             employeeList.push(internEmployee);
 
             // call the function to ask if the user wants to add more employees
@@ -154,13 +214,13 @@ function addAnIntern() {
 function generateHTML() {
     // temporary log to see if things are going into array
     console.log('GenerateHTML is being called');
+    console.log(employeeList);
 
     // function writeToFile(theFileName, data) {
     //     fs.writeFile('./dist/index.html', generateMarkdown(data), (err) =>
     //         err ? console.error(err) : console.log('You successfully created a new read me file.')
     //     );
 }
-
 
 // calls the initialize function
 init();
