@@ -44,11 +44,11 @@ function init() {
             // create a new manager object then push the manager into the employee array
             const managerEmployee = new Manager(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
             employeeList.push(managerEmployee);
-            
+
             // call the function to ask if the user wants to add more employees
             addAnotherRoleQuestionFunction();
         }
-    );
+        );
 }
 
 // the options for adding another employee or finish adding
@@ -62,15 +62,15 @@ const addAnotherRoleQuestion = [
 
 // prompt user if they want to make another engineer, another intern, or are done adding
 // if done adding, the HTML generator function is called
-function addAnotherRoleQuestionFunction(){
+function addAnotherRoleQuestionFunction() {
     inquirer
         .prompt(addAnotherRoleQuestion)
         .then((response) => {
-            if (response === 'Engineer'){
+            if (response === 'Engineer') {
                 addAnEngineer();
-            }else if(response === 'Intern'){
+            } else if (response === 'Intern') {
                 addAnIntern();
-            }else{
+            } else {
                 generateHTML();
             }
         });
@@ -100,12 +100,12 @@ const engineerQuestions = [
     }
 ];
 
-function addAnEngineer(){
+function addAnEngineer() {
     inquirer
         .prompt(engineerQuestions)
         .then((response) => {
             // create a new engineer object then push the engineer into the employee array
-            const engineerEmployee = new Engineer(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
+            const engineerEmployee = new Engineer(`${response.name}, ${response.id}, ${response.email}, ${response.gitHub}`);
             employeeList.push(engineerEmployee);
 
             // call the function to ask if the user wants to add more employees
@@ -137,12 +137,12 @@ const internQuestions = [
     }
 ];
 
-function addAnIntern(){
+function addAnIntern() {
     inquirer
         .prompt(engineerQuestions)
         .then((response) => {
             // create a new engineer object then push the engineer into the employee array
-            const internEmployee = new Intern(`${response.name}, ${response.id}, ${response.email}, ${response.officeNumber}`);
+            const internEmployee = new Intern(`${response.name}, ${response.id}, ${response.email}, ${response.school}`);
             employeeList.push(internEmployee);
 
             // call the function to ask if the user wants to add more employees
@@ -150,7 +150,7 @@ function addAnIntern(){
         })
 }
 
-function generateHTML(){
+function generateHTML() {
     // temporary log to see if things are going into array
     console.log(employeeList);
 
