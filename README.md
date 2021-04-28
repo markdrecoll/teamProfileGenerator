@@ -16,7 +16,7 @@
   ## Usage
   While in the root folder, run a terminal and type "node index.js". You will then be prompted for input.
   ## License
-  ![GitHub license](https://img.shields.io/badge/Language-JavaScript-orange.svg)
+  ![GitHub license](https://img.shields.io/badge/Language-JavaScript-orange.svg)  
   ![GitHub license](https://img.shields.io/badge/Environment-Node-yellow.svg)
   ## Tests
   >npm run test
