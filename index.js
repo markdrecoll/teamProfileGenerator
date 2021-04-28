@@ -240,8 +240,6 @@ function generateHTML() {
     }
 
 
-
-
     let thePageHtmlContent = `
 <!DOCTYPE html>
 <html lang="en">
