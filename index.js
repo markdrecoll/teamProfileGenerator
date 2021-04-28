@@ -212,14 +212,70 @@ function addAnIntern() {
 }
 
 function generateHTML() {
+
+    let employeeHtmlContent = '';
+
+    for(var i=0; i<employeeList.length; i++){
+        if(employeeList[i].getRole() === 'Manager'){
+            employeeHtmlContent += 
+`<div class="card m-3" style="width: 17em">
+<div class ="card-header bg-primary text-white">
+<h1>${employeeList[i].getName()}</h1>
+<h2><i class="bi bi-cup-fill"></i>${employeeList[i].getRole()}</h2></div>
+<div class="card-body bg-light">
+<ul class = "list-group list-group-flush">
+<li class = "list-group-item">ID: ${employeeList[i].getId()}</li>
+<li class = "list-group-item">Email: <a href = "mailto: ${employeeList[i].getEmail()}">${employeeList[i].getEmail()}</a></li>
+<li class = "list-group-item">Office Number: ${employeeList[i].officeNumber}</li></ul></div></div>`
+        }
+        
+        else if(employeeList[i].getRole() === 'Engineer'){
+            employeeHtmlContent += `Name: ${employeeList[i].name} ID: ${employeeList[i].id} Email: ${employeeList[i].email} GitHub: ${employeeList[i].github}`
+        }
+        
+        
+        else if(employeeList[i].getRole() === 'Intern'){
+            employeeHtmlContent += `Name: ${employeeList[i].name} ID: ${employeeList[i].id} Email: ${employeeList[i].email} School: ${employeeList[i].school}`
+        }
+    }
+
+
+
+
+    let thePageHtmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"/>
+<title>Team Generator</title>
+</head>
+<div class="jumbotron jumbotron-fluid bg-danger">
+<div class="container">
+<h1 class="display-4 text-center text-white">The Team</h1>
+</div>
+</div>
+<body>
+<div class="container row row-col-sm-12 row-col-md-3 d-flex justify-content-center mx-auto">
+<p>
+${employeeHtmlContent}
+</p>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>`
+
     // temporary log to see if things are going into array
     console.log('GenerateHTML is being called');
     console.log(employeeList);
 
-    // function writeToFile(theFileName, data) {
-    //     fs.writeFile('./dist/index.html', generateMarkdown(data), (err) =>
-    //         err ? console.error(err) : console.log('You successfully created a new read me file.')
-    //     );
+    fs.writeFile('./dist/index.html', thePageHtmlContent, function (err){
+        if (err) return console.log(err);
+    })
 }
 
 // calls the initialize function
