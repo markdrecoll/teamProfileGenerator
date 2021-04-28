@@ -1,5 +1,4 @@
 // import packages used by the application
-const Employee = require('./lib/employee');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
@@ -20,21 +19,6 @@ const managerQuestions = [
         type: 'input',
         message: "Please enter the manager's id: ",
         name: 'id',
-        validate: function (input) {
-            input = parseInt(input)
-                // Declare function as asynchronous, and save the done callback
-                var done = this.async();
-                // Do async stuff
-                setTimeout(function() {
-                  if (typeof input !== 'number' || isNaN(input) ) {
-                    // Pass the return value in the done callback
-                    done('You need to provide a number');
-                    return;
-                  }
-                  // Pass the return value in the done callback
-                  done(null, true);
-                }, 300);
-              }
     },
     {
         type: 'input',
@@ -44,22 +28,7 @@ const managerQuestions = [
     {
         type: 'input',
         message: "Please enter the manager's office number: ",
-        name: 'officeNumber',
-        validate: function (input) {
-            input = parseInt(input)
-                // Declare function as asynchronous, and save the done callback
-                var done = this.async();
-                // Do async stuff
-                setTimeout(function() {
-                  if (typeof input !== 'number' || isNaN(input) ) {
-                    // Pass the return value in the done callback
-                    done('You need to provide a number');
-                    return;
-                  }
-                  // Pass the return value in the done callback
-                  done(null, true);
-                }, 300);
-              }        
+        name: 'officeNumber',     
     }
 ];
 
@@ -68,8 +37,6 @@ function init() {
     inquirer
         .prompt(managerQuestions)
         .then((response) => {
-            // console.log just to see functionality            
-            console.log(response);
 
             // create a new manager object then push the manager into the employee array
             const managerEmployee = new Manager(`${response.name}`, `${response.id}`, `${response.email}`, `${response.officeNumber}`);
@@ -118,21 +85,6 @@ const engineerQuestions = [
         type: 'input',
         message: "Please enter the engineer's id: ",
         name: 'id',
-        validate: function (input) {
-            input = parseInt(input)
-                // Declare function as asynchronous, and save the done callback
-                var done = this.async();
-                // Do async stuff
-                setTimeout(function() {
-                  if (typeof input !== 'number' || isNaN(input) ) {
-                    // Pass the return value in the done callback
-                    done('You need to provide a number');
-                    return;
-                  }
-                  // Pass the return value in the done callback
-                  done(null, true);
-                }, 300);
-              }
     },
     {
         type: 'input',
@@ -171,21 +123,6 @@ const internQuestions = [
         type: 'input',
         message: "Please enter the intern's id: ",
         name: 'id',
-        validate: function (input) {
-            input = parseInt(input)
-            // Declare function as asynchronous, and save the done callback
-            var done = this.async();
-            // Do async stuff
-            setTimeout(function() {
-                if (typeof input !== 'number' || isNaN(input) ) {
-                // Pass the return value in the done callback
-                done('You need to provide a number');
-                return;
-                }
-                // Pass the return value in the done callback
-                done(null, true);
-            }, 300);
-        }
     },
     {
         type: 'input',
@@ -204,6 +141,7 @@ function addAnIntern() {
     inquirer
         .prompt(internQuestions)
         .then((response) => {
+
             // create a new engineer object then push the engineer into the employee array
             const internEmployee = new Intern(`${response.name}`, `${response.id}`, `${response.email}`, `${response.school}`);
             employeeList.push(internEmployee);
@@ -247,7 +185,7 @@ function generateHTML() {
 <ul class = "list-group list-group-flush">
 <li class = "list-group-item">ID: ${employeeList[i].getId()}</li>
 <li class = "list-group-item">Email: <a href = "mailto: ${employeeList[i].getEmail()}">${employeeList[i].getEmail()}</a></li>
-<li class = "list-group-item">GitHub: <a href="https://github.com/${employeeList[i].github}">${employeeList[i].github}</a></li></ul></div></div>`
+<li class = "list-group-item">GitHub: <a href="https://github.com/${employeeList[i].github}" target="_blank">${employeeList[i].github}</a></li></ul></div></div>`
         }
         
         // this html is generated when an employee is an intern, it includes their school
