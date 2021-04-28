@@ -63,7 +63,7 @@ const managerQuestions = [
     }
 ];
 
-// initializes the program and prompts the user for their info
+// initializes the program, creates a manager based on user responses to their inquiry
 function init() {
     inquirer
         .prompt(managerQuestions)
@@ -146,6 +146,7 @@ const engineerQuestions = [
     }
 ];
 
+// creates an engineer based on user responses to their inquiry
 function addAnEngineer() {
     inquirer
         .prompt(engineerQuestions)
@@ -198,6 +199,7 @@ const internQuestions = [
     }
 ];
 
+// creates an intern based on user responses to their inquiry
 function addAnIntern() {
     inquirer
         .prompt(internQuestions)
@@ -211,17 +213,22 @@ function addAnIntern() {
         })
 }
 
+// creates the index.html page to display all the team information to the user
 function generateHTML() {
 
+    // initialized employeeHtmlContent as empty, to have employees pushed in during the for loop
     let employeeHtmlContent = '';
 
+    // iterates through the array of employee objects
     for(var i=0; i<employeeList.length; i++){
+
+        // this html is generated when an employee is a manager, it includes their office number
         if(employeeList[i].getRole() === 'Manager'){
             employeeHtmlContent += 
 `<div class="card m-3" style="width: 17em">
 <div class ="card-header bg-primary text-white">
 <h1>${employeeList[i].getName()}</h1>
-<h2><i class="bi bi-cup-fill"></i>${employeeList[i].getRole()}</h2></div>
+<h2><i class="bi bi-cup-fill"></i> ${employeeList[i].getRole()}</h2></div>
 <div class="card-body bg-light">
 <ul class = "list-group list-group-flush">
 <li class = "list-group-item">ID: ${employeeList[i].getId()}</li>
@@ -229,17 +236,36 @@ function generateHTML() {
 <li class = "list-group-item">Office Number: ${employeeList[i].officeNumber}</li></ul></div></div>`
         }
         
+        // this html is generated when an employee is an engineer, it includes the github
         else if(employeeList[i].getRole() === 'Engineer'){
-            employeeHtmlContent += `Name: ${employeeList[i].name} ID: ${employeeList[i].id} Email: ${employeeList[i].email} GitHub: ${employeeList[i].github}`
+            employeeHtmlContent += 
+`<div class="card m-3" style="width: 17em">
+<div class ="card-header bg-primary text-white">
+<h1>${employeeList[i].getName()}</h1>
+<h2><i class="bi bi-tools"></i> ${employeeList[i].getRole()}</h2></div>
+<div class="card-body bg-light">
+<ul class = "list-group list-group-flush">
+<li class = "list-group-item">ID: ${employeeList[i].getId()}</li>
+<li class = "list-group-item">Email: <a href = "mailto: ${employeeList[i].getEmail()}">${employeeList[i].getEmail()}</a></li>
+<li class = "list-group-item">GitHub: <a href="https://github.com/${employeeList[i].github}">${employeeList[i].github}</a></li></ul></div></div>`
         }
         
-        
+        // this html is generated when an employee is an intern, it includes their school
         else if(employeeList[i].getRole() === 'Intern'){
-            employeeHtmlContent += `Name: ${employeeList[i].name} ID: ${employeeList[i].id} Email: ${employeeList[i].email} School: ${employeeList[i].school}`
+            employeeHtmlContent += 
+`<div class="card m-3" style="width: 17em">
+<div class ="card-header bg-primary text-white">
+<h1>${employeeList[i].getName()}</h1>
+<h2><i class="bi bi-eyeglasses"></i> ${employeeList[i].getRole()}</h2></div>
+<div class="card-body bg-light">
+<ul class = "list-group list-group-flush">
+<li class = "list-group-item">ID: ${employeeList[i].getId()}</li>
+<li class = "list-group-item">Email: <a href = "mailto: ${employeeList[i].getEmail()}">${employeeList[i].getEmail()}</a></li>
+<li class = "list-group-item">School: ${employeeList[i].school}</li></ul></div></div>`
         }
     }
 
-
+    // this is the full html of the page, there is a variable in the middle for splicing in employee details and html
     let thePageHtmlContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -267,10 +293,7 @@ ${employeeHtmlContent}
 </body>
 </html>`
 
-    // temporary log to see if things are going into array
-    console.log('GenerateHTML is being called');
-    console.log(employeeList);
-
+    // writes the completed html (thePageHtmlContent) into an index.html file in the dist folder
     fs.writeFile('./dist/index.html', thePageHtmlContent, function (err){
         if (err) return console.log(err);
     })
